@@ -9,13 +9,10 @@ import com.cdweb.entity.ApplicantVacancy;
 public interface ApplicantVacancyService {
 	public List<ApplicantVacancy> getListApplicantVacancy(int idVacancy);
 
-	public void addApplicantVacancy(String vacancyNumber, String applicantVacancyName, String emailApplicant,
-			Date dateOnApplicantVacancy, String state, String cv, Date dateOfTheScheduleInterview, Time startTime,
-			Time endTime, List<Integer> listIdUser);
+	public void addApplicantVacancy(int idVacancy,ApplicantVacancy applicant);
 
-	public ApplicantVacancy getApplicantVacancy(String applicantNumber);
+	public ApplicantVacancy getApplicantVacancy(int idApplicant);
 
-	public ApplicantVacancy editApplicantVacancy(String vacancyNumber, String applicantNumber, String applicantVacancyName,
-			String emailApplicant, Date dateOnApplicantVacancy, String state, String cv,
-			Date dateOfTheScheduleInterview, Time startTime, Time endTime);
+	public ApplicantVacancy editApplicantVacancy(ApplicantVacancy applicant);
+public List<ApplicantVacancy> getListApplicant();
 }

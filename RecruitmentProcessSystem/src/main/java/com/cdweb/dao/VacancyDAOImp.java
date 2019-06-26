@@ -90,5 +90,12 @@ public class VacancyDAOImp implements VacancyDAO {
 //			session.close();
 //		}
 	}
+	
+	@Transactional
+	public Vacancy getVacancy(int idVacancy) {
+		Session session = sessionFactory.getCurrentSession();
+		Vacancy vacancy = (Vacancy) session.find(Vacancy.class, idVacancy);
+		return vacancy;
+	}
 
 }

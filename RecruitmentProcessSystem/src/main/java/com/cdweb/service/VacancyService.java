@@ -17,8 +17,6 @@ public interface VacancyService {
 	public void addVacancy(Vacancy v);
 
 	public void remove(int id);
+	public Vacancy getVacancy(int idVacancy);
 
-//	public void addVacancy(String positionName, int numberOpening, String departmentName, 
-//			String description, String offer, int experience, String gender, String degree,
-//			String typeOfStaff, String dateClose,String status);
 }

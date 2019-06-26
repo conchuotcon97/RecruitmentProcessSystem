@@ -66,7 +66,7 @@ public class ApplicantVacancy implements Serializable {
 		return applicantNumber;
 	}
 
-	public void setApplicantVacancy(String applicantNumber) {
+	public void setApplicantNumber(String applicantNumber) {
 		this.applicantNumber = applicantNumber;
 	}
 

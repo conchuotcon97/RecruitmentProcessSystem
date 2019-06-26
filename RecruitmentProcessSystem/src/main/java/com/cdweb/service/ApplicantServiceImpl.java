@@ -19,7 +19,6 @@ public class ApplicantServiceImpl implements ApplicantService{
 	@Override
 	public void deleteApplicantDetailsByIdApplicant(int idApplicant) {
 	applicantDao.deleteApplicantDetailsByIdApplicant(idApplicant);
-		
 	}
 
 }

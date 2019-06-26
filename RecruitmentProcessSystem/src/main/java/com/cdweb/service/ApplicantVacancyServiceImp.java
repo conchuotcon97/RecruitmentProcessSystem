@@ -15,29 +15,29 @@ public class ApplicantVacancyServiceImp implements ApplicantVacancyService {
 	@Autowired
 	ApplicantVacancyDAO applicantVacancyDAO;
 
+	@Override
 	public List<ApplicantVacancy> getListApplicantVacancy(int idVacancy) {
 
 		return applicantVacancyDAO.getListApplicantVacancy(idVacancy);
 	}
 
-	public void addApplicantVacancy(String vacancyNumber, String applicantVacancyName, String emailApplicant,
-			Date dateOnApplicantVacancy, String state, String cv, Date dateOfTheScheduleInterview, Time startTime,
-			Time endTime, List<Integer> listIdUser) {
-		applicantVacancyDAO.addApplicantVacancy(vacancyNumber, applicantVacancyName, emailApplicant,
-				dateOnApplicantVacancy, state, cv, dateOfTheScheduleInterview, startTime, endTime, listIdUser);
+	public void addApplicantVacancy(int idVacancy, ApplicantVacancy applicant) {
+		applicantVacancyDAO.addApplicantVacancy(idVacancy,applicant);
 
 	}
 
-	public ApplicantVacancy getApplicantVacancy(String applicantNumber) {
-		return applicantVacancyDAO.getApplicantVacancy(applicantNumber);
+	public ApplicantVacancy getApplicantVacancy(int idApplicant) {
+		return applicantVacancyDAO.getApplicantVacancy(idApplicant);
 	}
 
-	public ApplicantVacancy editApplicantVacancy(String vacancyNumber, String applicantNumber, String applicantVacancyName,
-			String emailApplicant, Date dateOnApplicantVacancy, String state, String cv,
-			Date dateOfTheScheduleInterview, Time startTime, Time endTime) {
-		return applicantVacancyDAO.editApplicantVacancy(vacancyNumber, applicantNumber, applicantVacancyName, emailApplicant,
-				dateOnApplicantVacancy, state, cv, dateOfTheScheduleInterview, startTime, endTime);
+	public ApplicantVacancy editApplicantVacancy(ApplicantVacancy applicant) {
+		return applicantVacancyDAO.editApplicantVacancy(applicant);
 
+	}
+
+	@Override
+	public List<ApplicantVacancy> getListApplicant() {
+		return applicantVacancyDAO.getListApplicant();
 	}
 
 }

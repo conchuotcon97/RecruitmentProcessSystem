@@ -1,5 +1,6 @@
 package com.cdweb.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.cdweb.entity.ApplicantVacancy;
 import com.cdweb.entity.Department;
 import com.cdweb.entity.InterviewerScheduleInterview;
 import com.cdweb.entity.Position;
+import com.cdweb.entity.User;
 import com.cdweb.entity.Vacancy;
 import com.cdweb.service.ApplicantService;
 import com.cdweb.service.ApplicantVacancyService;
@@ -83,25 +85,57 @@ ApplicantService applicantService;
 		return vacancy;
 		
 	}
-	@RequestMapping(value = "/vacancys/{idVacancy}/applicants",method = RequestMethod.GET,produces = "application/json")
-	public Map<ApplicantVacancy, List<InterviewerScheduleInterview>> applicantList(@PathVariable(value = "idVacancy") int idVacancy) {
-		List<ApplicantVacancy> listApplicantVacancy = applicantVacancyService.getListApplicantVacancy(idVacancy);
-		List<InterviewerScheduleInterview> listInterviewerScheduleInterview = interviewerScheduleInterviewService
-				.getListInterviewerScheduleInterview();
-		Map<ApplicantVacancy, List<InterviewerScheduleInterview>> models = new HashMap<ApplicantVacancy, List<InterviewerScheduleInterview>>();
-		for (ApplicantVacancy applicantVacancy : listApplicantVacancy) {
-			System.out.println(applicantVacancy.toString());
-			int idSchedule = applicantVacancy.getScheduleInterviewDetails().getIdSchedule();
-			listInterviewerScheduleInterview = interviewerScheduleInterviewService
-					.getListInterviewerScheduleInterviewById(idSchedule);
-			models.put(applicantVacancy, listInterviewerScheduleInterview);
-			for (InterviewerScheduleInterview interviewerScheduleInterview : listInterviewerScheduleInterview) {
-				System.out.println(interviewerScheduleInterview.getUser().getFullName());
+	@RequestMapping(value = "/vacancys/{idVacancy}/applicants/appISI",method = RequestMethod.GET,produces = "application/json")
+//	public Map< List<User>,ApplicantVacancy> applicantListInterviewer(@PathVariable(value = "idVacancy") int idVacancy) {
+//		List<ApplicantVacancy> listApplicantVacancy = applicantVacancyService.getListApplicantVacancy(idVacancy);
+//		List<InterviewerScheduleInterview> listInterviewerScheduleInterview = interviewerScheduleInterviewService
+//				.getListInterviewerScheduleInterview();
+//		Map< List<User>,ApplicantVacancy> models = new HashMap<List<User>,ApplicantVacancy>();
+//		for (ApplicantVacancy applicantVacancy : listApplicantVacancy) {
+//			System.out.println(applicantVacancy.toString());
+//			int idSchedule = applicantVacancy.getScheduleInterviewDetails().getIdSchedule();
+//			listInterviewerScheduleInterview = interviewerScheduleInterviewService
+//					.getListInterviewerScheduleInterviewById(idSchedule);
+//			List<User> users=new ArrayList<User>();
+//			
+//			
+//			for (InterviewerScheduleInterview interviewerScheduleInterview : listInterviewerScheduleInterview) {
+//				users.add(interviewerScheduleInterview.getUser());
+//			}
+//			models.put( users,applicantVacancy);
+//		}
+//		System.out.println(" handler het list Interviewrr by id vacancy");
+//
+//		return models;
+		public Map< List<String>,ApplicantVacancy> applicantListInterviewer(@PathVariable(value = "idVacancy") int idVacancy) {
+			List<ApplicantVacancy> listApplicantVacancy = applicantVacancyService.getListApplicantVacancy(idVacancy);
+			List<InterviewerScheduleInterview> listInterviewerScheduleInterview = interviewerScheduleInterviewService
+					.getListInterviewerScheduleInterview();
+			Map< List<String>,ApplicantVacancy> models = new HashMap<List<String>,ApplicantVacancy>();
+			for (ApplicantVacancy applicantVacancy : listApplicantVacancy) {
+				System.out.println(applicantVacancy.toString());
+				int idSchedule = applicantVacancy.getScheduleInterviewDetails().getIdSchedule();
+				listInterviewerScheduleInterview = interviewerScheduleInterviewService
+						.getListInterviewerScheduleInterviewById(idSchedule);
+				List<String> users=new ArrayList<String>();
+				
+				
+				for (InterviewerScheduleInterview interviewerScheduleInterview : listInterviewerScheduleInterview) {
+					users.add(interviewerScheduleInterview.getUser().getFullName());
+				}
+				models.put( users,applicantVacancy);
 			}
-		}
+			System.out.println(" handler het list Interviewrr by id vacancy");
+			
+			return models;
+	}
+	@RequestMapping(value = "/vacancys/{idVacancy}/applicants",method = RequestMethod.GET,produces = "application/json")
+	public List<ApplicantVacancy> applicantList(@PathVariable(value = "idVacancy") int idVacancy) {
+		List<ApplicantVacancy> listApplicantVacancy = applicantVacancyService.getListApplicantVacancy(idVacancy);
+		
 		System.out.println(" handler het list applicant by id vacancy");
 
-		return models;
+		return listApplicantVacancy;
 	}
 
 }
